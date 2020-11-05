@@ -1,18 +1,19 @@
-from types import MethodType
+from enum import Enum, unique
 
 
-class Student(object):
-    __slots__ = ('name','age')
+@unique
+class Weekday(Enum):
+    Sun = 0
+    Mon = 1
+    Tue = 2
+    wed = 3
+    Thu = 4
+    Fri = 5
+    Sat = 6
 
 
-s = Student()
+day1 = Weekday.Mon
+print(day1 == Weekday.wed)
 
-s.name = 'Michael'
-s.age = 25
-
-class GraduateStudent(Student):
-    pass
-
-g = GraduateStudent()
-
-g.score = 999
+for name, member in Weekday.__members__.items():
+    print(name, '=>', member)
