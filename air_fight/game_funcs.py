@@ -10,17 +10,42 @@ def check_events(ship):
         elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
             # 向右移动飞船
             ship.moving_right = True
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
-            # 向左移动飞船
-            ship.moving_left = True
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_UP:
-            # 向上移动飞船
-            ship.moving_up = True
-        elif event.type == pygame.KEYDOWN and event.key == pygame.K_DOWN:
-            # 向下移动飞船
-            ship.moving_down = True
+        elif event.type == pygame.KEYDOWN:
+            check_keydown_events(event, ship)
         elif event.type == pygame.KEYUP:
-            ship.moving_up = ship.moving_down = ship.moving_left = ship.moving_right = False
+            check_keyup_events(event, ship)
+
+
+def check_keydown_events(event, ship):
+    '''响应按键'''
+    if event.key == pygame.K_RIGHT:
+        # 向右移动飞船
+        ship.moving_right = True
+    elif event.key == pygame.K_LEFT:
+        # 向左移动飞船
+        ship.moving_left = True
+    elif event.key == pygame.K_UP:
+        # 向上移动飞船
+        ship.moving_up = True
+    elif event.key == pygame.K_DOWN:
+        # 向下移动飞船
+        ship.moving_down = True
+
+
+def check_keyup_events(event, ship):
+    '''响应按键'''
+    if event.key == pygame.K_RIGHT:
+        # 向右移动飞船
+        ship.moving_right = False
+    elif event.key == pygame.K_LEFT:
+        # 向左移动飞船
+        ship.moving_left = False
+    elif event.key == pygame.K_UP:
+        # 向上移动飞船
+        ship.moving_up = False
+    elif event.key == pygame.K_DOWN:
+        # 向下移动飞船
+        ship.moving_down = False
 
 
 def update_screen(ai_setting, screen, ship):

@@ -13,7 +13,8 @@ class Ship():
         # 将每艘新飞船放在屏幕底部中央
         self.rect.centerx = self.screen_recct.centerx
         self.rect.bottom = self.screen_recct.bottom
-        self.center = float(self.rect.centerx)
+        self.centerx = float(self.rect.centerx)
+        self.centery = float(self.rect.centery)
         # 移动标志
         self.moving_right = False
         self.moving_left = False
@@ -22,14 +23,16 @@ class Ship():
 
     def update(self):
         '''根据移动标志调整飞船的未知'''
-        if self.moving_right:
-            self.rect.centerx += 1
-        elif self.moving_left:
-            self.rect.centerx -= 1
-        elif self.moving_up:
-            self.rect.centery -= 1
-        elif self.moving_down:
-            self.rect.centery += 1
+        if self.moving_right and self.rect.right < self.screen_recct.right:
+            self.centerx += self.ai_settings.ship_speed_factor
+        if self.moving_left and self.rect.left > 0:
+            self.centerx -= self.ai_settings.ship_speed_factor
+        if self.moving_up and self.rect.top > 0:
+            self.centery -= self.ai_settings.ship_speed_factor
+        if self.moving_down and self.rect.bottom < self.screen_recct.bottom:
+            self.centery += self.ai_settings.ship_speed_factor
+        self.rect.centerx = self.centerx
+        self.rect.centery = self.centery
 
     def blitme(self):
         '''在指定未知绘制飞船'''

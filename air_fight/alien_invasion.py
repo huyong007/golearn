@@ -13,7 +13,7 @@ def run_game():
         (ai_settings.screen_width, ai_settings.screen_height))
     pygame.display.set_caption("Air Fighting")
     # 创建一艘飞船
-    ship = Ship(screen)
+    ship = Ship(ai_settings, screen)
     # 开始游戏的主循环
     while True:
         # 监视键盘和鼠标事件
