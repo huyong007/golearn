@@ -18,5 +18,5 @@ s.close()
 
 header, html = data.split(b'\r\n\r\n', 1)
 print(header.decode('utf-8'))
-with open('sina.html', 'wb') as f:
+with open('req.html', 'wb') as f:
     f.write(html)
