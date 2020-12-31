@@ -1,5 +1,5 @@
 drop database if exists awesome;
-create datebase awesome;
+create database awesome;
 use awesome;
 grant select,
     insert,

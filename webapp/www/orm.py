@@ -63,7 +63,7 @@ def create_args_string(num):
 class Field(object):
 
     def __init__(self, name, column_type, primary_key, default):
-        self.name = names
+        self.name = name
         self.column_type = column_type
         self.primary_key = primary_key
         self.default = default
