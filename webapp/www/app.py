@@ -107,18 +107,28 @@ async def response_factory(app, handler):
 
 
 def datetime_filter(t):
-    pass
-
-
-def index(request):
-    return web.Response(body=b'<h1>hello,world</h1>', headers={'content-type': 'text/html'})
+    delta = int(time.time()-t)
+    if delta < 3600:
+        return u'1分钟qian'
+    if delta < 3600:
+        return u'%s分钟前' % (delta//60)
+    if delta < 86400:
+        return u'%s小时前' % (delta//3600)
+    if delta < 604800:
+        return u'%s天前' % (delta // 86400)
+    dt = datetime.fromtimestamp(t)
+    return u'%s年%s月%s日' % (dt.year, dt.month, dt.day)
 
 
 async def init(loop):
-    app = web.Application(loop=loop)
-    app.router.add_route('GET', '/', index)
+    await orm.create_pool(loop=loop, host='127.0.0.1', port=3306, user='www', password='www', db='awesome')
+    app = web.Application(loop=loop, middlewares=[
+                          logger_factory, response_factory])
+    init_jinja2(app, filters=dict(datetime=datetime_filter))
+    add_routes(app, 'handlers')
+    add_static(app)
     srv = await loop.create_server(app.make_handler(), '127.0.0.1', 9000)
-    logging.info('sever started at http://127.0.0.1:9000...')
+    logging.into('server started at http://127.0.0.1:9000...')
     return srv
 
 
