@@ -16,7 +16,7 @@ remote_dir = '/home/huyong/work/backstage/dist'
 
 class SSH(object):
 
-    def __init__(self, ip='192.168.2.11', port=22, username='huyong', password='Hy!!88&&', timeout=30):
+    def __init__(self, ip='192.168.2.11', port=22, username='8888888', password='888888', timeout=30):
         self.ip = ip  # ssh远程连接的服务器ip
         self.port = 22  # ssh的端口一般默认是22，
         self.username = username  # 服务器用户名
